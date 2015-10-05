@@ -19,6 +19,7 @@ describe Roman do
 
   it 'should convert 1939 to MCMXXXIX' do
     expect(Roman.convert('MCMXXXIX')).to eq(1939)
+
   end
 
 end
