@@ -17,7 +17,7 @@ class Converter
   end
 
   def validation
-    raise 'The format is not valid' unless @@formats.include? @format
+    raise 'The format is not valid' unless @@formats.include? @format || @format.nil?
     raise 'The argument is not present' if @argument.nil?
     case @format
     when @@formats[0]
@@ -55,10 +55,10 @@ class Converter
     case @format
     when @@formats[0]
       roman = Roman.new(@argument)
-      result = roman.convert
+      result = roman.convert(@argument)
     when @@formats[1]
       arabic = Arabic.new(@argument)
-      #arabic.convert
+      result = arabic.convert(Converter.convert_number(@argument))
     end
     return result
   end
