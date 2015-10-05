@@ -1,10 +1,9 @@
-require './lib/converter'
+require_relative './bin/converter'
 
 format = ARGV.shift
 argument = ARGV.shift
 
 converter = Converter.new(format, argument)
-if converter.validation()
-  result = converter.init
-  converter.printing_to_screen(result)
+if converter.valid?
+  converter.init
 end

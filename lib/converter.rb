@@ -1,5 +1,7 @@
-require_relative 'roman'
-require_relative 'arabic'
+require_relative './roman'
+require_relative './arabic'
+require_relative './newfile'
+require_relative './print'
 
 class Converter
 
@@ -7,62 +9,55 @@ class Converter
 
   attr_accessor :format, :argument
 
-  def initialize(format, argument)
-    @format = format
-    @argument = argument
+  def initialize(format)
+    if Converter.valid?(format)
+      @format = format
+    end
   end
 
-  def validation
-    raise 'The format is not valid' unless @@formats.include? @format || @format.nil?
-    raise 'The argument is not present' if @argument.nil?
+  def self.valid?(format)
+    if !@@formats.include? format || format.nil?
+      puts 'ERROR: The format is not present or unrecognized. Please use [-r, -a, -f]'
+      return false
+    else
+      return true
+    end
+  end
+
+  def convert_by_format(argument)
     case @format
     when @@formats[0]
-      Converter.roman?(@argument)
+      roman_num = RomanNumeral.new(argument)
+      unless roman_num.roman.nil?
+        arabic = roman_num.to_arabic
+        Print.print_on_screen(arabic)
+        return arabic
+      end
     when @@formats[1]
-      Converter.arabic?(@argument)
+      arabic = ArabicNumber.new(argument)
+      unless arabic.number.nil?
+        roman = arabic.to_roman
+        Print.print_on_screen(roman)
+        return roman
+      end
+
     when @@formats[2]
-      Converter.file?(@argument)
+      transform = []
+      result = NewFile.read_file(argument)
+      unless result.empty?
+        result.each do |line|
+          case line[0]
+          when 'a'
+            number = ArabicNumber.new(line[1])
+            transform << "#{ line[1] } #{ number.to_roman }"
+          when 'r'
+            roman = RomanNumeral.new(line[1])
+            transform << "#{ line[1] } #{ roman.to_arabic }"
+          end
+        end
+        puts "The results are in 'result.out' file"
+        Print.print_to_file('result.out', transform)
+      end
     end
-  end
-
-  def self.roman?(argument)
-    if argument.size > 14 || argument.upcase.scan(/^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/).empty?
-      raise 'The argument is not a valid roman number.'
-    else
-      true
-    end
-  end
-
-  def self.arabic?(argument)
-    if Converter.convert_number(argument) && Converter.convert_number(argument).between?(0, 4000)
-      true
-    else
-      raise 'The argument is not a valid number or greater than 4000.'
-    end
-  end
-
-  def self.file?(argument)
-    raise 'The file you specify is not exist!!!' unless File.exist?(argument)
-  end
-
-  def self.convert_number(object)
-    begin
-      return Integer(object)
-    rescue
-      return nil
-    end
-  end
-
-  def init
-    case @format
-    when @@formats[0]
-      result = Roman.convert(@argument.upcase)
-    when @@formats[1]
-      result = Arabic.convert(Converter.convert_number(@argument))
-    end
-  end
-
-  def printing_to_screen(result)
-    puts "The result is #{result}"
   end
 end
