@@ -2,13 +2,7 @@ require_relative 'roman_arabic'
 
 class Roman
 
-  attr_accessor :roman
-
-  def initialize(roman)
-    @roman = roman
-  end
-
-  def convert(roman)
+  def self.convert(roman)
     arabic = 0
     until roman.empty?
       RomanArabic::ROMANS.each { |key, value|

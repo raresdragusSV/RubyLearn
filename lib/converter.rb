@@ -1,13 +1,9 @@
 require_relative 'roman'
 require_relative 'arabic'
 
-class ConverterError < Exception
-
-end
-
 class Converter
 
-  @@formats = ['-r', '-a' ]
+  @@formats = ['-r', '-a' , '-f']
 
   attr_accessor :format, :argument
 
@@ -24,11 +20,13 @@ class Converter
       Converter.roman?(@argument)
     when @@formats[1]
       Converter.arabic?(@argument)
+    when @@formats[2]
+      Converter.file?(@argument)
     end
   end
 
   def self.roman?(argument)
-    if argument.size > 14 || argument.scan(/^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/).empty?
+    if argument.size > 14 || argument.upcase.scan(/^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/).empty?
       raise 'The argument is not a valid roman number.'
     else
       true
@@ -43,6 +41,10 @@ class Converter
     end
   end
 
+  def self.file?(argument)
+    raise 'The file you specify is not exist!!!' unless File.exist?(argument)
+  end
+
   def self.convert_number(object)
     begin
       return Integer(object)
@@ -54,16 +56,13 @@ class Converter
   def init
     case @format
     when @@formats[0]
-      roman = Roman.new(@argument)
-      result = roman.convert(@argument)
+      result = Roman.convert(@argument.upcase)
     when @@formats[1]
-      arabic = Arabic.new(@argument)
-      result = arabic.convert(Converter.convert_number(@argument))
+      result = Arabic.convert(Converter.convert_number(@argument))
     end
-    return result
   end
 
-  def printing(result)
+  def printing_to_screen(result)
     puts "The result is #{result}"
   end
 end

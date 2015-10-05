@@ -1,10 +1,10 @@
 require './lib/converter'
 
-format = ARGV[0].dup
-argument = ARGV[1].dup
+format = ARGV.shift
+argument = ARGV.shift
 
 converter = Converter.new(format, argument)
 if converter.validation()
   result = converter.init
-  converter.printing(result)
+  converter.printing_to_screen(result)
 end
