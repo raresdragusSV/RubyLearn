@@ -21,4 +21,13 @@ describe Arabic do
     expect(Arabic.convert(1939)).to eq('MCMXXXIX')
   end
 
+  it 'should convert 0 to N' do
+    #added this to see what happens, as expected, it doesn't work
+    expect(Arabic.convert(0)).to eq('N')
+  end
+
+  # you should also add more egde-cases and complicated numbers to both tests
+  # also consider adding a few wrong numbers as well, it should handle it gracefully,
+  # not the way Roman currently handles errors
+
 end
