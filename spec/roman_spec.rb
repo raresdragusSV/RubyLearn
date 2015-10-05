@@ -18,7 +18,19 @@ describe Roman do
   end
 
   it 'should convert 1939 to MCMXXXIX' do
+    # this is a test to convert MCMXXXIX, not what it says in
+    # the description
     expect(Roman.convert('MCMXXXIX')).to eq(1939)
+  end
+
+  # it 'should convert N to 0' do
+  #   # added this to see what happens, as expected, it doesn't work
+  #   # and it also breaks the tests
+  #   expect(Roman.convert('N')).to eq(0)
+  # end
+
+  it 'should convert MM to 2000' do
+    expect(Roman.convert('MM')).to eq(2000)
   end
 
 end

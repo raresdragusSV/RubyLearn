@@ -1,4 +1,5 @@
 module RomanArabic
+    # try to use better fitting names for the module and the constant
   ROMANS = {
     'M'   => 1000,
     'CM'  => 900,
