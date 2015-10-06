@@ -1,4 +1,5 @@
 require 'prawn'
+require 'axlsx'
 
 class Print
   def self.print_on_screen(result)
@@ -40,5 +41,17 @@ class Print
         text "| #{result.id} | #{result.input_type} | #{result.input} | #{result.result} | #{result.converted_at} |"
       end
     end
+  end
+
+  def self.print_on_xls_from_database(filename, results)
+    p = Axlsx::Package.new
+    p.workbook.add_worksheet(:name => "Basic Worksheet") do |sheet|
+      sheet.add_row ["Id", "Input-type", "Input","Result","Converted-At"]
+      results.each do |result|
+        sheet.add_row [result.id, result.input_type, result.input, result.result, result.converted_at]
+      end
+    end
+    p.use_shared_strings = true
+    p.serialize(filename)
   end
 end

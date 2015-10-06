@@ -109,8 +109,12 @@ class Argument
           converters = Converter.order(value)
           Print.print_on_pdf_from_database('database.pdf', converters)
           puts "The file 'database.pdf' was created!"
+        elsif argument[2] == '-f' && argument[3] == 'xls'
+          converters = Converter.order(value)
+          Print.print_on_xls_from_database('database.xlsx', converters)
+          puts "The file 'database.xlsx' was created!"
         else
-          puts "ERROR: The correct arguments are '-d asc','-d asc', '-f txt', '-f pdf'"
+          puts "ERROR: The correct arguments are '-d asc','-d asc', '-f txt', '-f pdf', -f xls"
         end
       else
         puts "ERROR: The column name don't exist"
