@@ -1,4 +1,5 @@
-require_relative 'roman_arabic'
+require_relative './roman_arabic'
+require_relative './connection'
 
 class ArabicNumber
 
@@ -12,9 +13,12 @@ class ArabicNumber
 
   def self.valid?(number)
     if ArabicNumber.parse_number_string(number) && ArabicNumber.parse_number_string(number).between?(1, 4000)
-      true
+      return true
     else
-      puts 'ERROR: The argument is not a valid number or greater than 4000.'
+      error = 'The argument is not a valid number or greater than 4000.'
+      puts 'ERROR: ' + error
+      Crud.insert('error', number, error)
+      return false
     end
   end
 

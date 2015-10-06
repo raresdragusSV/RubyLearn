@@ -1,5 +1,6 @@
 require_relative './arabic'
 require_relative './roman'
+require_relative './connection'
 
 class NewFile
 
@@ -20,7 +21,7 @@ class NewFile
             break
           end
         else
-          if RomanNumeral.valid?(line_without_return)
+          if RomanNumber.valid?(line_without_return)
             lines << ['r', line_without_return]
           else
             puts "ERROR on line #{line_num}"
@@ -28,9 +29,11 @@ class NewFile
           end
         end
       end
-      lines
+      return lines
     else
       puts 'ERROR: The file you specify is not exist!!!'
+      lines = nil
+      return lines
     end
   end
 end

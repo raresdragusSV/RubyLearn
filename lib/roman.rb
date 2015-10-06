@@ -1,11 +1,11 @@
 require_relative './roman_arabic'
 
-class RomanNumeral
+class RomanNumber
 
   attr_accessor :roman, :number
 
   def initialize(roman)
-    if RomanNumeral.valid?(roman)
+    if RomanNumber.valid?(roman)
       @roman = roman.upcase.dup
     end
   end
@@ -15,7 +15,10 @@ class RomanNumeral
     if (roman =~ /(^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})){1,14}$/) == 0
       return true
     else
-      puts 'ERROR: The argument is not a valid roman number.'
+      error = 'The argument is not a valid roman number.'
+      puts 'ERROR: ' + error
+      Crud.insert('error', roman, error)
+      return false
     end
   end
 
