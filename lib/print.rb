@@ -8,4 +8,13 @@ class Print
       a.each { |element| f.puts(element) }
     end
   end
+
+  def self.print_on_screen_from_database(results)
+    puts   '_________________________________________________________________________'
+    puts   '| Id  | Input-type | Input     | Result    | Converted-At                |'
+    puts   '_________________________________________________________________________ '
+    results.each do |result|
+      puts "| #{result.id}  | #{result.input_type}       | #{result.input}      | #{result.result}         | #{result.converted_at}   |"
+    end
+  end
 end
