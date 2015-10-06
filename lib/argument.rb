@@ -101,8 +101,16 @@ class Argument
           else
             puts "ERROR: The direction can be 'asc' or 'desc'"
           end
-        else argument[2] != '-d'
-          puts "ERROR: The next argument must be '-d' for direction."
+        elsif argument[2] == '-f' && argument[3] == 'txt'
+          converters = Converter.order(value)
+          Print.print_on_txt_from_database('database.txt', converters)
+          puts "The file 'database.txt' was created!"
+        elsif argument[2] == '-f' && argument[3] == 'pdf'
+          converters = Converter.order(value)
+          Print.print_on_pdf_from_database('database.pdf', converters)
+          puts "The file 'database.pdf' was created!"
+        else
+          puts "ERROR: The correct arguments are '-d asc','-d asc', '-f txt', '-f pdf'"
         end
       else
         puts "ERROR: The column name don't exist"
