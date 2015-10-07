@@ -1,6 +1,6 @@
 require_relative './roman_arabic'
 require_relative './connection'
-
+# all observations from the Roman class apply here as well
 class ArabicNumber
 
   attr_accessor :number, :roman
