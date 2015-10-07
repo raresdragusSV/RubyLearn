@@ -33,6 +33,7 @@ class Print
   end
 
   def self.print_on_pdf_from_database(filename, results)
+    # pdf should be a nice looking table, not an ASCII table
     Prawn::Document.generate(filename) do
       text '__________________________________________________'
       text '| Id | Input-type | Input | Result | Converted-At|'
@@ -47,6 +48,8 @@ class Print
     p = Axlsx::Package.new
     p.workbook.add_worksheet(:name => "Basic Worksheet") do |sheet|
       sheet.add_row ["Id", "Input-type", "Input","Result","Converted-At"]
+      # make sure you set the type of each field so excel recognises it,
+      # and formats it as desired
       results.each do |result|
         sheet.add_row [result.id, result.input_type, result.input, result.result, result.converted_at]
       end
