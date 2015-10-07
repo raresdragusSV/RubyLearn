@@ -23,7 +23,7 @@ end
 
 if !ActiveRecord::Base.connection.table_exists?(:converters)
   CreateStudySessionsTable.migrate(:up)
-  puts "The table Converter was created !!!"
+  puts "The table Converters was created !!!"
 end
 
 class Converter < ActiveRecord::Base

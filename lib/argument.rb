@@ -15,8 +15,10 @@ class Argument
       end
     elsif argument.size == 0
       puts 'ERROR: You must supply an argument.'
+      return nil
     else
       puts 'ERROR: Too many arguments.'
+      return nil
     end
   end
 
@@ -31,8 +33,10 @@ class Argument
       end
     elsif argument.size == 0
       puts 'ERROR: You must supply an argument.'
+      return nil
     else
       puts 'ERROR: Too many arguments.'
+      return nil
     end
   end
 
@@ -61,8 +65,10 @@ class Argument
       end
     elsif argument.size == 0
       puts 'ERROR: You must supply an argument.'
+      return nil
     else
       puts 'ERROR: Too many arguments.'
+      return nil
     end
   end
 
@@ -86,35 +92,44 @@ class Argument
         puts 'ERROR: You must supply a column table: id, input_type, input, result, converted_at'
       elsif columns.include? argument[1]
         value = argument[1]
-        if argument[2].nil?
+        case argument[2]
+        when nil
           converters = Converter.order(value)
           Print.print_on_screen_from_database(converters)
-        elsif argument[2] == '-d'
-          if argument[3].nil?
+        when '-d'
+          case argument[3]
+          when nil
             puts 'ERROR: You must supply an argument for direction'
-          elsif argument[3] == 'asc'
+          when 'asc'
             converters = Converter.order(value)
             Print.print_on_screen_from_database(converters)
-          elsif argument[3] == 'desc'
+          when 'desc'
             converters = Converter.order(value + ' DESC')
             Print.print_on_screen_from_database(converters)
           else
             puts "ERROR: The direction can be 'asc' or 'desc'"
           end
-        elsif argument[2] == '-f' && argument[3] == 'txt'
-          converters = Converter.order(value)
-          Print.print_on_txt_from_database('database.txt', converters)
-          puts "The file 'database.txt' was created!"
-        elsif argument[2] == '-f' && argument[3] == 'pdf'
-          converters = Converter.order(value)
-          Print.print_on_pdf_from_database('database.pdf', converters)
-          puts "The file 'database.pdf' was created!"
-        elsif argument[2] == '-f' && argument[3] == 'xls'
-          converters = Converter.order(value)
-          Print.print_on_xls_from_database('database.xlsx', converters)
-          puts "The file 'database.xlsx' was created!"
+        when '-f'
+          case argument[3]
+          when nil
+            puts 'ERROR: You must supply a file extension txt, pdf, xls'
+          when  'txt'
+            converters = Converter.order(value)
+            Print.print_on_txt_from_database('database.txt', converters)
+            puts "The file 'database.txt' was created!"
+          when 'pdf'
+            converters = Converter.order(value)
+            Print.print_on_pdf_from_database('database.pdf', converters)
+            puts "The file 'database.pdf' was created!"
+          when 'xls'
+            converters = Converter.order(value)
+            Print.print_on_xls_from_database('database.xlsx', converters)
+            puts "The file 'database.xlsx' was created!"
+          else
+            puts "ERROR: The correct arguments are txt, pdf, xls"
+          end
         else
-          puts "ERROR: The correct arguments are '-d asc','-d asc', '-f txt', '-f pdf', -f xls"
+          puts 'ERROR: The next argument must be -d ot -f'
         end
       else
         puts "ERROR: The column name don't exist"
