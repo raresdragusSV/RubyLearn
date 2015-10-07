@@ -1,3 +1,0 @@
-class ConvertError < Exception
-
-end

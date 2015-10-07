@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 	spec.summary				= %q{Roman Arabic Numbers Converter}
 	spec.license				=	"Open Source"
 
-	spec.files					= ['lib/*.rb']
+	spec.files					= ['lib/.rb']
 	spec.executables		= ['bin/number_converter.rb']
 	spec.test_files			= ['spec/*_spec.rb']
 	spec.require_paths	= ["lib"]
