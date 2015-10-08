@@ -26,29 +26,29 @@ describe Converter do
   end
 
   context '.convert_by_format' do
-    it 'should return [I,1]' do
+    it "should return ['roman', 'I' ,1]" do
       converter = Converter.new('-r', 'I')
-      expect(converter.convert_by_format).to eq(['I', 1])
+      expect(converter.convert_by_format).to eq(['roman','I', 1])
     end
 
-    it "should return [IIIVM,'ERROR: The input is not a valid roman numeral']" do
+    it "should return ['error', 'IIIVM' ,'ERROR: The input is not a valid roman numeral']" do
       converter = Converter.new('-r', 'IIIVM')
-      expect(converter.convert_by_format).to eq(['IIIVM', 'ERROR: The input is not a valid roman numeral'])
+      expect(converter.convert_by_format).to eq(['error', 'IIIVM', 'ERROR: The input is not a valid roman numeral'])
     end
 
-    it "should return [1, 'I']" do
+    it "should return ['arabic',1, 'I']" do
       converter = Converter.new('-a', 1)
-      expect(converter.convert_by_format).to eq([1, 'I'])
+      expect(converter.convert_by_format).to eq(['arabic', 1, 'I'])
     end
 
-    it "should return [4500, 'ERROR: The input is not a valid number, zero or bigger than 4000']" do
+    it "should return ['error', 4500, 'ERROR: The input is not a valid number, zero or bigger than 4000']" do
       converter = Converter.new('-a', 4500)
-      expect(converter.convert_by_format).to eq([4500, 'ERROR: The input is not a valid number, zero or bigger than 4000'])
+      expect(converter.convert_by_format).to eq(['error', 4500, 'ERROR: The input is not a valid number, zero or bigger than 4000'])
     end
 
-    it "should return [4ab0, 'ERROR: The input is not a valid number, zero or bigger than 4000']" do
+    it "should return ['error', '4ab0', 'ERROR: The input is not a valid number, zero or bigger than 4000']" do
       converter = Converter.new('-a', '4ab0')
-      expect(converter.convert_by_format).to eq(['4ab0', 'ERROR: The input is not a valid number, zero or bigger than 4000'])
+      expect(converter.convert_by_format).to eq(['error', '4ab0', 'ERROR: The input is not a valid number, zero or bigger than 4000'])
     end
   end
 end

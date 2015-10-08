@@ -1,6 +1,8 @@
 require_relative './number_converter/converter'
 require_relative './number_converter/file_reader'
 require_relative './number_converter/output'
+require_relative './number_converter/connection'
+require_relative './number_converter/conversion'
 
 class ArgumentProcessor
   attr_accessor :args, :converter, :file, :output_handler, :results
@@ -19,9 +21,15 @@ class ArgumentProcessor
     end
   end
 
+  def self.write_to_db(input_type, input, result)
+    conversion = Conversion.new(input_type: input_type, input: input, result: result)
+    conversion.save
+  end
+
   def run
     if @converter
       @results = @converter.convert_by_format
+      ArgumentProcessor.write_to_db(@results[0], @results[1], @results[2])
     elsif @file
       @results = @file.read_file
     end

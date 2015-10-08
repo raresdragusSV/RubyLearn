@@ -27,17 +27,17 @@ class Converter
       roman_numeral = RomanNumeral.new(@input)
       arabic_number = roman_numeral.to_arabic
       if arabic_number == 'error'
-        results = [@input, 'ERROR: The input is not a valid roman numeral']
+        results = ['error', @input, 'ERROR: The input is not a valid roman numeral']
       else
-        results = [@input, arabic_number]
+        results = ['roman', @input, arabic_number]
       end
     elsif @format == '-a'
       arabic_number = ArabicNumber.new(@input)
       roman_numeral = arabic_number.to_roman
       if roman_numeral == 'error'
-        results = [@input, 'ERROR: The input is not a valid number, zero or bigger than 4000']
+        results = ['error', @input, 'ERROR: The input is not a valid number, zero or bigger than 4000']
       else
-        results = [@input, roman_numeral]
+        results = ['arabic', @input, roman_numeral]
       end
     end
     return results

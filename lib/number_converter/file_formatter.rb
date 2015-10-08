@@ -1,4 +1,5 @@
 require_relative './converter'
+require_relative '../argument_processor'
 
 class FileFormatter
   def print(results)
@@ -11,7 +12,8 @@ class FileFormatter
         else
           converter = Converter.new(result[0], result[1])
           line = converter.convert_by_format
-          f.puts("#{line[0]} #{line[1]}")
+          f.puts("#{line[1]} #{line[2]}")
+          ArgumentProcessor.write_to_db(line[0],line[1],line[2])
         end
       end
     end
