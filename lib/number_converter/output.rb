@@ -1,6 +1,7 @@
 require_relative './default_formatter'
 require_relative './default_orderer'
 require_relative './file_formatter'
+require_relative './table_formatter'
 
 class Output
   attr_accessor :formatter, :orderer

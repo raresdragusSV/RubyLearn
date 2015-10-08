@@ -14,6 +14,7 @@ module InputErrors
       when '-f'
         puts 'ERROR: You must specify a text file!!!'
         exit
+      when '--list'
       else
         puts 'ERROR: Wrong argument. Try -r, -a, -f, --list !!!'
         exit

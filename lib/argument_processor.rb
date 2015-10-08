@@ -13,6 +13,8 @@ class ArgumentProcessor
       @converter = Converter.new(@args[0], @args[1])
     elsif @args[0] == '-f'
       @file = FileReader.new(@args[1])
+    elsif @args[0] == '--list'
+      @output_handler = Output.new(TableFormatter.new)
     end
     if @converter
       @output_handler = Output.new()
@@ -26,12 +28,19 @@ class ArgumentProcessor
     conversion.save
   end
 
+  def self.get_from_db
+    results = Conversion.all
+    return results
+  end
+
   def run
     if @converter
       @results = @converter.convert_by_format
       ArgumentProcessor.write_to_db(@results[0], @results[1], @results[2])
     elsif @file
       @results = @file.read_file
+    elsif !@results
+      @results = ArgumentProcessor.get_from_db
     end
     @output_handler.print(@results)
   end
