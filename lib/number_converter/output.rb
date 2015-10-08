@@ -1,5 +1,5 @@
-require_relative './defaultformatter'
-require_relative './defaultorderer'
+require_relative './default_formatter'
+require_relative './default_orderer'
 
 class Output
   attr_accessor :formatter, :orderer

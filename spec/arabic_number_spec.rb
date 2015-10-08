@@ -1,4 +1,4 @@
-require 'number_converter/arabicnumber'
+require 'number_converter/arabic_number'
 
 describe ArabicNumber do
   context '.initialize' do

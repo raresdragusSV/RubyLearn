@@ -1,4 +1,4 @@
-require 'number_converter/romannumeral'
+require 'number_converter/roman_numeral'
 
 describe RomanNumeral do
   context '.initialize' do

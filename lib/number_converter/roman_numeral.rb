@@ -1,4 +1,4 @@
-require_relative './romansymbols'
+require_relative './roman_symbols'
 
 class RomanNumeral
   attr_accessor :roman, :arabic, :valid

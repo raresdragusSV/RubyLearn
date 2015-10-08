@@ -1,5 +1,5 @@
-require_relative './arabicnumber'
-require_relative './romannumeral'
+require_relative './arabic_number'
+require_relative './roman_numeral'
 
 class Converter
   attr_accessor :format, :input
