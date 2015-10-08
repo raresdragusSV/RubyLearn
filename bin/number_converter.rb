@@ -1,11 +1,7 @@
-require_relative '../lib/argumentprocessor'
+require_relative '../lib/argument_processor'
 
-args = []
+args = ARGV.dup
 
-until ARGV.empty?
-  args << ARGV.shift
-end
-
-argumentprocessor = ArgumentProcessor.new(args)
-argumentprocessor.run
+argument_processor = ArgumentProcessor.new(args)
+argument_processor.run
 

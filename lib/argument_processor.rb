@@ -14,7 +14,6 @@ class ArgumentProcessor
 
   def run
     @results = @converter.convert_by_format if @converter
-    p @results
     @output_handler.print(@results)
   end
 end
