@@ -1,0 +1,16 @@
+___________________________________________________________________________________________________
+| Id | Input-type | Input | Result | Converted-At                                                 |
+___________________________________________________________________________________________________
+| 14 | arabic | 893 | DCCCXCIII | 2015-10-08 14:13:44 UTC |
+| 13 | roman | MMMCV | 3105 | 2015-10-08 11:23:50 UTC |
+| 12 | arabic | 123 | CXXIII | 2015-10-08 09:55:02 UTC |
+| 11 | arabic | 1234 | MCCXXXIV | 2015-10-08 09:55:02 UTC |
+| 10 | arabic | 6 | VI | 2015-10-08 09:55:02 UTC |
+| 9 | roman | IV | 4 | 2015-10-08 09:55:02 UTC |
+| 8 | arabic | 3 | III | 2015-10-08 09:55:02 UTC |
+| 7 | roman | IX | 9 | 2015-10-08 09:55:02 UTC |
+| 6 | arabic | 9 | IX | 2015-10-08 09:55:02 UTC |
+| 5 | roman | VII | 7 | 2015-10-08 09:55:02 UTC |
+| 3 | error | ixxxx | ERROR: The input is not a valid roman numeral | 2015-10-08 09:47:49 UTC |
+| 2 | error | ixxxx | ERROR: The input is not a valid roman numeral | 2015-10-08 09:45:49 UTC |
+| 1 | arabic | 1234 | MCCXXXIV | 2015-10-08 09:45:08 UTC |

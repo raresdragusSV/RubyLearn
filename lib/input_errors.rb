@@ -14,21 +14,21 @@ module InputErrors
       when '-f'
         puts 'ERROR: You must specify a text file!!!'
         exit
-      when '--list'
+      when '-l'
       else
-        puts 'ERROR: Wrong argument. Try -r, -a, -f, --list !!!'
+        puts 'ERROR: Wrong argument. Try -r, -a, -f, -l !!!'
         exit
       end
     elsif args.size == 2
       case args[0]
-      when '--list'
-        puts 'ERROR: --list could not have another argument!!!'
-        exit
       when '-f'
         if !File.exist?(args[1])
           puts "ERROR: The file  you specify don't exist!!!"
           exit
         end
+      when '-l'
+        puts 'ERROR: The correct format for sorting is -l -s value'
+        exit
       end
     elsif args.size > 2
       case args[0]
@@ -41,6 +41,16 @@ module InputErrors
       when '-f'
         puts 'ERROR: -f could not have more than two arguments!!!'
         exit
+      when '-l'
+        if args[1] != '-s'
+          puts 'ERROR: The next argument must be -s'
+          exit
+        else
+          if !['-d','-f'].include?(args[3])
+            puts 'ERROR: The next argumet must be -d or -f'
+            exit
+          end
+        end
       end
     end
   end
